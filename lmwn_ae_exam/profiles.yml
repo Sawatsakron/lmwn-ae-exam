@@ -1,0 +1,6 @@
+lmwn_ae_exam:
+  target: local
+  outputs:
+    local:
+      type: duckdb
+      path: 'ae-exam-main\Data Sources\ae_exam_db.duckdb'
