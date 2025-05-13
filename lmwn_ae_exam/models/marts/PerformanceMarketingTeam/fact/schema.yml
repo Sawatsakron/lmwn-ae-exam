@@ -1,0 +1,114 @@
+version: 2
+
+models:
+  - name: model_mart_fact_campaign
+    description: "Fact table for campaign interactions"
+    tags: mart
+    columns:
+      - name: InteractionID
+        description: "Unique ID for the interaction"
+        tests:
+          - not_null
+          - unique
+      - name: CampaignID
+        description: "Foreign key referencing the campaign dimension"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('model_mart_dim_campaign')
+              field: CampaignID
+      - name: OrderID
+        description: "ID of the order linked to this interaction, if applicable"
+        tests:
+          - relationships:
+              to: ref('model_mart_fact_orders')
+              field: OrderID
+      - name: InteractionDatetime
+        description: "Timestamp of when the interaction occurred"
+        tests:
+          - not_null
+      - name: EventType
+        description: "Type of interaction event (e.g., click, impression)"
+        tests:
+          - not_null
+      - name: Platform
+        description: "Platform where the interaction took place"
+        tests:
+          - not_null
+      - name: AdCost
+        description: "Cost of the advertisement associated with the interaction"
+        tests:
+          - not_null
+      - name: IsNewCustomer
+        description: "Flag indicating if the customer is new (TRUE/FALSE)"
+        tests:
+          - not_null
+      - name: Revenue
+        description: "Revenue generated from the interaction"
+        tests:
+          - not_null
+      - name: CreateDate
+        description: "Timestamp when the record was created"
+        tests:
+          - not_null
+      - name: UpdateDate
+        description: "Timestamp when the record was last updated"
+        tests:
+          - not_null
+      - name: CreateBy
+        description: "User who created the record"
+        tests:
+          - not_null
+      - name: UpdatedBy
+        description: "User who last updated the record"
+        tests:
+          - not_null
+
+  - name: model_mart_fact_orders
+    description: "Fact table for order transactions"
+    tags: mart
+    columns:
+      - name: OrderID
+        description: "Unique ID for the order"
+        tests:
+          - not_null
+          - unique
+      - name: CustomerID
+        description: "Foreign key referencing the customer dimension"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('model_mart_dim_customer')
+              field: CustomerID
+      - name: OrderDatetime
+        description: "Timestamp of when the order was placed"
+        tests:
+          - not_null
+      - name: OrderStatus
+        description: "Current status of the order"
+        tests:
+          - not_null
+      - name: TotalAmount
+        description: "Total amount for the order"
+        tests:
+          - not_null
+      - name: PaymentMethod
+        description: "Method used for payment"
+        tests:
+          - not_null
+      - name: CreateDate
+        description: "Timestamp when the record was created"
+        tests:
+          - not_null
+      - name: UpdateDate
+        description: "Timestamp when the record was last updated"
+        tests:
+          - not_null
+      - name: CreateBy
+        description: "User who created the record"
+        tests:
+          - not_null
+      - name: UpdatedBy
+        description: "User who last updated the record"
+        tests:
+          - not_null

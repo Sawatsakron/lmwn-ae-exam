@@ -1,0 +1,122 @@
+version: 2
+
+models:
+  - name: model_mart_dim_campaign
+    description: "Dimension table for campaign data"
+    tags: mart
+    columns:
+      - name: CampaignID
+        description: "Unique ID for the campaign"
+        tests:
+          - not_null
+          - unique
+      - name: CampaignName
+        description: "The name of the campaign"
+        tests:
+          - not_null
+      - name: Type
+        description: "The type of the campaign"
+        tests:
+          - not_null
+      - name: Objective
+        description: "The objective of the campaign (e.g., awareness, conversion)"
+        tests:
+          - not_null
+      - name: Channel
+        description: "The marketing channel for the campaign (e.g., Facebook, Google)"
+        tests:
+          - not_null
+      - name: Budget
+        description: "The budget allocated for the campaign"
+        tests:
+          - not_null
+      - name: CostModel
+        description: "The cost model used for the campaign (e.g., CPM, CPC)"
+        tests:
+          - not_null
+      - name: TargetingStrategy
+        description: "The targeting strategy used in the campaign (e.g., demographic, geographic)"
+        tests:
+          - not_null
+      - name: StartDate
+        description: "The start date of the campaign"
+        tests:
+          - not_null
+      - name: EndDate
+        description: "The end date of the campaign"
+        tests:
+          - not_null
+      - name: IsActive
+        description: "Flag indicating if the campaign is currently active (TRUE/FALSE)"
+        tests:
+          - not_null
+      - name: CreateDate
+        description: "Timestamp when the record was created"
+        tests:
+          - not_null
+      - name: UpdateDate
+        description: "Timestamp when the record was last updated"
+        tests:
+          - not_null
+      - name: CreateBy
+        description: "User who created the record"
+        tests:
+          - not_null
+      - name: UpdatedBy
+        description: "User who last updated the record"
+        tests:
+          - not_null
+
+  - name: model_mart_dim_customer
+    description: "Dimension table for customer data"
+    tags: mart
+    columns:
+      - name: CustomerID
+        description: "Unique ID for the customer"
+        tests:
+          - not_null
+          - unique
+      - name: CustomerSegment
+        description: "Segment the customer belongs to"
+        tests:
+          - not_null
+      - name: Gender
+        description: "Customer's gender"
+        tests:
+          - not_null
+      - name: BirthYear
+        description: "Customer's birth year"
+        tests:
+          - not_null
+      - name: ReferralSource
+        description: "Source of customer referral"
+        tests:
+          - not_null
+      - name: PreferredDevice
+        description: "Customer's preferred device"
+        tests:
+          - not_null
+      - name: Signup
+        description: "Date when customer signed up"
+        tests:
+          - not_null
+      - name: Status
+        description: "Customer's current status"
+        tests:
+          - not_null
+      - name: CreateDate
+        description: "Timestamp when the record was created"
+        tests:
+          - not_null
+      - name: UpdateDate
+        description: "Timestamp when the record was last updated"
+        tests:
+          - not_null
+      - name: CreateBy
+        description: "User who created the record"
+        tests:
+          - not_null
+      - name: UpdatedBy
+        description: "User who last updated the record"
+        tests:
+          - not_null
