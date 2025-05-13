@@ -32,5 +32,13 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   lmwn_ae_exam:
     # Config indicated by + and applies to all files under models/example/
-    example:
+    staging:
       +materialized: view
+    marts:
+      PerformanceMarketingTeam:
+        dimension:
+          +materialized: table
+        fact:
+          +materialized: table
+    +intermediates:
+      +materialized: ephemeral
