@@ -21,7 +21,7 @@ customer_mapping as (
         fi.Platform,
         fi.Channel
     from first_interactions fi
-    join {{ ref('model_mart_fact_orders') }} fo on fi.OrderID = fo.OrderID
+    join {{ ref('model_mart_fact_orders_campaign') }} fo on fi.OrderID = fo.OrderID
 ),
 
 purchase_behavior as (
@@ -33,7 +33,7 @@ purchase_behavior as (
         sum(fo.TotalAmount) as TotalSpend,
         avg(fo.TotalAmount) as AvgOrderValue
     from customer_mapping cm
-    join {{ ref('model_mart_fact_orders') }} fo on cm.CustomerID = fo.CustomerID
+    join {{ ref('model_mart_fact_orders_campaign') }} fo on cm.CustomerID = fo.CustomerID
     where fo.OrderStatus = 'completed'
     group by cm.CustomerID, cm.CampaignID
 ),
@@ -58,8 +58,8 @@ select
         when count(distinct cm.CustomerID) = 0 then null
         else round(ac.TotalAcquisitionCost / count(distinct cm.CustomerID), 2)
     end as CostPerAcquisition,
-    round(avg(pb.TotalOrders),2) as AvgOrdersPerCustomer,
-    round(avg(pb.RepeatOrders),2) as AvgRepeatOrders,
+    round(avg(pb.TotalOrders),0) as AvgOrdersPerCustomer,
+    round(avg(pb.RepeatOrders),0) as AvgRepeatOrders,
     round(avg(pb.TotalSpend),2) as AvgCustomerSpend,
     round(avg(pb.AvgOrderValue),2) as AvgOrderValue
 from customer_mapping cm

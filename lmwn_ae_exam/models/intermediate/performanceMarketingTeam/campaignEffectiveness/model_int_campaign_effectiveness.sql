@@ -22,7 +22,7 @@ users_complete_purchase as (
         fc.CampaignID, 
         count(distinct fo.CustomerID) as CompletedPurchase
     from {{ ref('model_mart_fact_campaign') }} fc
-    inner join {{ ref('model_mart_fact_orders') }} fo 
+    inner join {{ ref('model_mart_fact_orders_campaign') }} fo 
         on fc.OrderID = fo.OrderID
     where fc.EventType in ('click', 'conversion') 
         and fo.OrderStatus = 'completed'

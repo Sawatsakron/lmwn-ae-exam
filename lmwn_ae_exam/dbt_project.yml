@@ -40,5 +40,10 @@ models:
           +materialized: table
         fact:
           +materialized: table
+      FleetManagementTeam:
+        dimension:
+          +materialized: table
+        fact:
+          +materialized: table
     +intermediates:
       +materialized: ephemeral

@@ -21,7 +21,7 @@ models:
         description: "ID of the order linked to this interaction, if applicable"
         tests:
           - relationships:
-              to: ref('model_mart_fact_orders')
+              to: ref('model_mart_fact_orders_campaign')
               field: OrderID
       - name: InteractionDatetime
         description: "Timestamp of when the interaction occurred"
@@ -64,7 +64,7 @@ models:
         tests:
           - not_null
 
-  - name: model_mart_fact_orders
+  - name: model_mart_fact_orders_campaign
     description: "Fact table for order transactions"
     tags: mart
     columns:
