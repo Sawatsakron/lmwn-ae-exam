@@ -1,0 +1,85 @@
+version: 2
+
+models:
+  - name: model_mart_dim_driver
+    description: "Dimension table for driver information in the Fleet Management domain"
+    tags: mart
+    columns:
+      - name: DriverID
+        description: "Unique ID for the driver"
+        tests:
+          - not_null
+          - unique
+      - name: JoinDate
+        description: "Date when the driver joined"
+        tests:
+          - not_null
+      - name: VehicleType
+        description: "Type of vehicle used by the driver"
+        tests:
+          - not_null
+      - name: RegionID
+        description: "ID of the region where the driver operates"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('model_mart_dim_region')
+              field: RegionID
+      - name: Status
+        description: "Current status of the driver (active/inactive)"
+        tests:
+          - not_null
+      - name: Rating
+        description: "Driver's current rating"
+        tests:
+          - not_null
+      - name: BonusTier
+        description: "Tier level for driver's bonus eligibility"
+        tests:
+          - not_null
+      - name: CreateDate
+        description: "Timestamp when record was created"
+        tests:
+          - not_null
+      - name: UpdateDate
+        description: "Timestamp when record was last updated"
+        tests:
+          - not_null
+      - name: CreateBy
+        description: "User who created the record"
+        tests:
+          - not_null
+      - name: UpdatedBy
+        description: "User who last updated the record"
+        tests:
+          - not_null
+
+  - name: model_mart_dim_region
+    description: "Dimension table for region information in the Fleet Management domain"
+    tags: mart
+    columns:
+      - name: RegionID
+        description: "Unique ID for the region"
+        tests:
+          - not_null
+          - unique
+      - name: RegionName
+        description: "Name of the region"
+        tests:
+          - not_null
+      - name: CreateDate
+        description: "Timestamp when record was created"
+        tests:
+          - not_null
+      - name: UpdateDate
+        description: "Timestamp when record was last updated"
+        tests:
+          - not_null
+      - name: CreateBy
+        description: "User who created the record"
+        tests:
+          - not_null
+      - name: UpdatedBy
+        description: "User who last updated the record"
+        tests:
+          - not_null

@@ -1,0 +1,171 @@
+version: 2
+
+models:
+  - name: model_mart_fact_orders_fleet
+    description: "Fact table for order transactions in the Fleet Management domain"
+    tags: mart
+    columns:
+      - name: OrderID
+        description: "Unique ID for the order"
+        tests:
+          - not_null
+          - unique
+      - name: DriverID
+        description: "ID of the driver delivering the order"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('model_mart_dim_driver')
+              field: DriverID
+      - name: PickupDatetime
+        description: "Timestamp when the order was picked up"
+        tests:
+          - not_null
+      - name: DeliveryDatetime
+        description: "Timestamp when the order was delivered"
+        tests:
+          - not_null
+      - name: OrderStatus
+        description: "Current status of the order"
+        tests:
+          - not_null
+      - name: DeliveryZone
+        description: "Region ID where the order was delivered"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('model_mart_dim_region')
+              field: RegionID
+      - name: TotalAmount
+        description: "Total amount for the order"
+        tests:
+          - not_null
+      - name: IsLateDelivery
+        description: "Flag indicating if delivery was late (TRUE/FALSE)"
+        tests:
+          - not_null
+      - name: DeliveryDistanceKM
+        description: "Distance for delivery in kilometers"
+        tests:
+          - not_null
+      - name: CreateDate
+        description: "Timestamp when record was created"
+        tests:
+          - not_null
+      - name: UpdateDate
+        description: "Timestamp when record was last updated"
+        tests:
+          - not_null
+      - name: CreateBy
+        description: "User who created the record"
+        tests:
+          - not_null
+      - name: UpdatedBy
+        description: "User who last updated the record"
+        tests:
+          - not_null
+
+  - name: model_mart_fact_driver_activity
+    description: "Fact table for order status activity in the Fleet Management domain"
+    tags: mart
+    columns:
+      - name: A_LogID
+        description: "Unique log ID for the status update"
+        tests:
+          - not_null
+          - unique
+      - name: OrderID
+        description: "ID of the order being updated"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('model_mart_fact_orders_fleet')
+              field: OrderID
+      - name: Status
+        description: "Status value of the order"
+        tests:
+          - not_null
+      - name: StatusDatetime
+        description: "Timestamp when the status was updated"
+        tests:
+          - not_null
+      - name: CreateDate
+        description: "Timestamp when record was created"
+        tests:
+          - not_null
+      - name: UpdateDate
+        description: "Timestamp when record was last updated"
+        tests:
+          - not_null
+      - name: CreateBy
+        description: "User who created the record"
+        tests:
+          - not_null
+      - name: UpdatedBy
+        description: "User who last updated the record"
+        tests:
+          - not_null
+
+  - name: model_mart_fact_program
+    description: "Fact table for driver incentive programs in the Fleet Management domain"
+    tags: mart
+    columns:
+      - name: P_LogID
+        description: "Unique log ID for the incentive record"
+        tests:
+          - not_null
+          - unique
+      - name: DriverID
+        description: "ID of the driver in the incentive program"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('model_mart_dim_driver')
+              field: DriverID
+      - name: IncentiveProgram
+        description: "Name or ID of the incentive program"
+        tests:
+          - not_null
+      - name: BonusAmount
+        description: "Amount of bonus for the incentive"
+        tests:
+          - not_null
+      - name: AppliedDate
+        description: "Date when the incentive was applied"
+        tests:
+          - not_null
+      - name: DeliveryTarget
+        description: "Target number of deliveries for the incentive"
+        tests:
+          - not_null
+      - name: ActualDeliveries
+        description: "Actual number of deliveries completed"
+        tests:
+          - not_null
+      - name: BonusQualified
+        description: "Flag indicating if the bonus was qualified (TRUE/FALSE)"
+        tests:
+          - not_null
+      - name: RegionID
+        description: "ID of the region where the incentive program applies"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('model_mart_dim_region')
+              field: RegionID
+      - name: CreateDate
+        description: "Timestamp when record was created"
+        tests:
+          - not_null
+      - name: UpdateDate
+        description: "Timestamp when record was last updated"
+        tests:
+          - not_null
+      - name: CreateBy
+        description: "User who created the record"
+        tests:
+          - not_null
+      - name: UpdatedBy
+        description: "User who last updated the record"
+        tests:
+          - not_null

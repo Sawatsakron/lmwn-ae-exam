@@ -24,7 +24,7 @@ first_order as (
         fo.CustomerID,
         min(fo.OrderDatetime) as FirstOrderDatetime
     from {{ ref('model_mart_fact_campaign') }} fc
-    join {{ ref('model_mart_fact_orders') }} fo
+    join {{ ref('model_mart_fact_orders_campaign') }} fo
         on fc.OrderID = fo.OrderID
     where fo.OrderStatus = 'completed'
       and fo.OrderDatetime > fc.InteractionDatetime
@@ -49,7 +49,7 @@ returned_and_purchase as (
         on fc.CampaignID = dca.CampaignID
     join {{ ref('model_mart_dim_customer') }} dcu 
         on fc.CustomerID = dcu.CustomerID
-    join {{ ref('model_mart_fact_orders') }} fo
+    join {{ ref('model_mart_fact_orders_campaign') }} fo
         on fc.CustomerID = fo.CustomerID
     left join first_order first
         on fo.CustomerID = first.CustomerID 
@@ -68,7 +68,7 @@ retention_behavior as (
     from {{ ref('model_mart_fact_campaign') }} fc
     join {{ ref('model_mart_dim_campaign') }} dca 
         on fc.CampaignID = dca.CampaignID
-    join {{ ref('model_mart_fact_orders') }} fo 
+    join {{ ref('model_mart_fact_orders_campaign') }} fo 
         on fc.CustomerID = fo.CustomerID
     left join first_order first 
         on fo.CustomerID = first.CustomerID
