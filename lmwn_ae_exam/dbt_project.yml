@@ -45,5 +45,12 @@ models:
           +materialized: table
         fact:
           +materialized: table
+      CustomerSuccessTeam:
+        dimension:
+          +materialized: table
+        fact:
+          +materialized: table
     +intermediates:
       +materialized: ephemeral
+  
+  
