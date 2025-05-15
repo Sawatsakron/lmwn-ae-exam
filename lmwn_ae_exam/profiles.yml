@@ -3,4 +3,4 @@ lmwn_ae_exam:
   outputs:
     local:
       type: duckdb
-      path: 'ae-exam-main\Data Sources\ae_exam_db.duckdb'
+      path: 'ae_exam_db.duckdb'
