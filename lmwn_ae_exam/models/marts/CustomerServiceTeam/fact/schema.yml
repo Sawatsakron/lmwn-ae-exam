@@ -1,0 +1,110 @@
+version: 2
+
+models:
+  - name: model_mart_fact_complaint_orders
+    description: "Fact table for orders with complaints in the Customer Service domain"
+    tags: mart
+    columns:
+      - name: OrderID
+        description: "Unique identifier for the order"
+        tests:
+          - not_null
+          - unique
+      - name: DriverID
+        description: "ID of the driver assigned to the order"
+      - name: OrderStatus
+        description: "Current status of the order"
+        tests:
+          - not_null
+      - name: RestaurantID
+        description: "ID of the restaurant related to the ticket"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('model_mart_dim_restauant')
+              field: RestaurantID
+      - name: Islatedelivery
+        description: "Flag indicating if delivery was late"
+        tests:
+          - not_null
+      - name: CreateDate
+        description: "Timestamp when record was created"
+        tests:
+          - not_null
+      - name: UpdateDate
+        description: "Timestamp when record was last updated"
+        tests:
+          - not_null
+      - name: CreateBy
+        description: "User who created the record"
+        tests:
+          - not_null
+      - name: UpdatedBy
+        description: "User who last updated the record"
+        tests:
+          - not_null
+
+  - name: model_mart_fact_customer_support
+    description: "Fact table for customer support tickets in the Customer Service domain"
+    tags: mart
+    columns:
+      - name: TicketID
+        description: "Unique identifier for the support ticket"
+        tests:
+          - not_null
+          - unique
+      - name: OrderID
+        description: "ID of the order related to the support ticket"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('model_mart_fact_complaint_orders')
+              field: OrderID
+      - name: IssueType
+        description: "Primary categorization of the support issue"
+        tests:
+          - not_null
+      - name: IssueSubType
+        description: "Secondary categorization of the support issue"
+      - name: Channel
+        description: "Communication channel used for the support ticket"
+        tests:
+          - not_null
+      - name: OpenedDatetime
+        description: "Timestamp when the ticket was opened"
+        tests:
+          - not_null
+      - name: ResolvedDatetime
+        description: "Timestamp when the ticket was resolved"
+      - name: Status
+        description: "Current status of the support ticket"
+        tests:
+          - not_null
+      - name: CSAT
+        description: "Customer satisfaction score"
+        tests:
+          - not_null
+      - name: CompensationAmount
+        description: "Amount of compensation provided to the customer"
+        tests:
+          - not_null
+      - name: ResolvedBy
+        description: "User who resolved the ticket"
+        tests:
+          - not_null
+      - name: CreateDate
+        description: "Timestamp when record was created"
+        tests:
+          - not_null
+      - name: UpdateDate
+        description: "Timestamp when record was last updated"
+        tests:
+          - not_null
+      - name: CreateBy
+        description: "User who created the record"
+        tests:
+          - not_null
+      - name: UpdatedBy
+        description: "User who last updated the record"
+        tests:
+          - not_null

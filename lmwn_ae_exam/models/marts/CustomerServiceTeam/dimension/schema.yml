@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: model_mart_dim_restauant
+    description: "Dimension table for restaurant information in the Customer Service domain"
+    tags: mart
+    columns:
+      - name: RestaurantID
+        description: "Unique identifier for the restaurant"
+        tests:
+          - not_null
+          - unique
+      - name: RestaurantName
+        description: "Name of the restaurant"
+        tests:
+          - not_null
+      - name: Category
+        description: "Category or cuisine type of the restaurant"
+        tests:
+          - not_null
+      - name: City
+        description: "City where the restaurant is located"
+        tests:
+          - not_null
+      - name: AverageRating
+        description: "Average customer rating of the restaurant"
+      - name: ActiveStatus
+        description: "Current status of the restaurant (active/inactive)"
+        tests:
+          - not_null
+      - name: CreateDate
+        description: "Timestamp when record was created"
+        tests:
+          - not_null
+      - name: UpdateDate
+        description: "Timestamp when record was last updated"
+        tests:
+          - not_null
+      - name: CreateBy
+        description: "User who created the record"
+        tests:
+          - not_null
+      - name: UpdatedBy
+        description: "User who last updated the record"
+        tests:
+          - not_null
